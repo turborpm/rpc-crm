@@ -1,6 +1,7 @@
 import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { inferQueryResponse, trpc } from "@/utils/trpc";
 import type { NextPage } from "next";
+import Image from "next/image";
 import React, { useState } from "react";
 
 const btn =
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
       voteMutation.mutate({ votedFor: first, votedAgainst: second });
     else if (selected === second)
       voteMutation.mutate({ votedFor: second, votedAgainst: first });
-      
+
     updateIds(getOptionsForVote());
   };
 
@@ -60,9 +61,11 @@ const PokemonListing: React.FC<{
 }> = (props) => {
   return (
     <div className="flex flex-col items-center">
-      <img
+      <Image
         src={props.pokemon.sprites.front_default || ""}
-        className="w-64 h-64"
+        layout="fixed"
+        width={256}
+        height={256}
       />
       <div className="text-xl text-center capitalize mt-[-2rem]">
         {props.pokemon.name}
