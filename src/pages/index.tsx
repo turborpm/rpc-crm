@@ -15,10 +15,6 @@ const Home: NextPage = () => {
 
   const voteMutation = trpc.useMutation(["cast-vote"]);
 
-  if (firstPokemon.isLoading || secondPokemon.isLoading) {
-    return null;
-  }
-
   const voteForRoundest = (selected: number) => {
     if (selected === first)
       voteMutation.mutate({ votedFor: first, votedAgainst: second });
