@@ -1,6 +1,7 @@
 import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { inferQueryResponse, trpc } from "@/utils/trpc";
 import type { NextPage } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -34,6 +35,9 @@ const Home: NextPage = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
+      <Head>
+        <title>Roundest Pokemon</title>
+      </Head>
       <div className="text-2xl text-center pt-8">Which Pokémon is Rounder?</div>
       {dataLoaded && (
         <div className="border rounded p-8 flex justify-between items-center max-w-2xl  md:flex-row animate-fade-in">
