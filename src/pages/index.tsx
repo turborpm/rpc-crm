@@ -2,6 +2,7 @@ import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { inferQueryResponse, trpc } from "@/utils/trpc";
 import type { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const btn =
@@ -49,12 +50,13 @@ const Home: NextPage = () => {
 
         <div className="p-2" />
       </div>
-      <a
-        href="https://github.com/galortega/roundest-mon"
-        className="absolute bottom-0 w-full text-xl text-center pb-2"
-      >
-        Github
-      </a>
+      <div className="absolute bottom-0 w-full text-xl text-center pb-2">
+        <a href="https://github.com/galortega/roundest-mon">Github</a>
+        {" | "}
+        <Link href="/results">
+          <a>Results</a>
+        </Link>
+      </div>
     </div>
   );
 };
