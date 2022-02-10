@@ -13,7 +13,8 @@ export const appRouter = trpc
       const pokemon = await prisma.pokemon.findFirst({
         where: { id: input.id },
       });
-      if (!pokemon) throw TRPC_ERROR_CODES_BY_KEY.NOT_FOUND;
+      if (!pokemon) throw new Error("Failed to find two pokemon");
+
       return pokemon;
     },
   })
