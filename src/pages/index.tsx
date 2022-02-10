@@ -49,7 +49,10 @@ const Home: NextPage = () => {
 
         <div className="p-2" />
       </div>
-      <a href="https://github.com/galortega/roundest-mon" className="absolute bottom-0 w-full text-xl text-center pb-2">
+      <a
+        href="https://github.com/galortega/roundest-mon"
+        className="absolute bottom-0 w-full text-xl text-center pb-2"
+      >
         Github
       </a>
     </div>
@@ -65,7 +68,7 @@ const PokemonListing: React.FC<{
   return (
     <div className="flex flex-col items-center">
       <Image
-        src={props.pokemon.sprites.front_default || ""}
+        src={props.pokemon.spriteUrl}
         layout="fixed"
         width={256}
         height={256}

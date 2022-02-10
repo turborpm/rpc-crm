@@ -1,8 +1,7 @@
 import * as trpc from "@trpc/server";
 import { z } from "zod";
-
-import { PokemonClient } from "pokenode-ts";
 import { prisma } from "@/backend/utils/prisma";
+import { TRPC_ERROR_CODES_BY_KEY } from "@trpc/server/rpc";
 
 export const appRouter = trpc
   .router()
@@ -11,9 +10,11 @@ export const appRouter = trpc
       id: z.number(),
     }),
     async resolve({ input }) {
-      const api = new PokemonClient();
-      const pokemon = await api.getPokemonById(input.id);
-      return { name: pokemon.name, sprites: pokemon.sprites };
+      const pokemon = await prisma.pokemon.findFirst({
+        where: { id: input.id },
+      });
+      if (!pokemon) throw TRPC_ERROR_CODES_BY_KEY.NOT_FOUND;
+      return pokemon;
     },
   })
   .mutation("cast-vote", {
