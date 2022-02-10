@@ -40,7 +40,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="text-2xl text-center pt-8">Which Pokémon is Rounder?</div>
       {dataLoaded && (
-        <div className="border rounded p-8 flex justify-between items-center max-w-2xl  md:flex-row animate-fade-in">
+        <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
           <PokemonListing
             pokemon={firstPokemon.data}
             vote={() => voteForRoundest(first)}
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
             pokemon={secondPokemon.data}
             vote={() => voteForRoundest(second)}
           />
-          <div className="p-2" />
+          <div className="md:p-2" />
         </div>
       )}
       {!dataLoaded && <img src="/grid.svg" />}
