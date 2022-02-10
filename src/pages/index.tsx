@@ -26,31 +26,31 @@ const Home: NextPage = () => {
     updateIds(getOptionsForVote());
   };
 
-  return (
-    <div className="h-screen w-screen flex flex-col justify-center align-center items-center">
-      <div className="text-2xl text-center">Which Pokémon is Rounder?</div>
-      <div className="p-2" />
-      <div className="border rounded p-8 flex justify-between items-center max-w-2xl">
-        {!firstPokemon.isLoading &&
-          firstPokemon.data &&
-          !secondPokemon.isLoading &&
-          secondPokemon.data && (
-            <>
-              <PokemonListing
-                pokemon={firstPokemon.data}
-                vote={() => voteForRoundest(first)}
-              />
-              <div className="p-8">Vs</div>
-              <PokemonListing
-                pokemon={secondPokemon.data}
-                vote={() => voteForRoundest(second)}
-              />
-            </>
-          )}
+  const dataLoaded =
+    !firstPokemon.isLoading &&
+    firstPokemon.data &&
+    !secondPokemon.isLoading &&
+    secondPokemon.data;
 
-        <div className="p-2" />
-      </div>
-      <div className="absolute bottom-0 w-full text-xl text-center pb-2">
+  return (
+    <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
+      <div className="text-2xl text-center pt-8">Which Pokémon is Rounder?</div>
+      {dataLoaded && (
+        <div className="border rounded p-8 flex justify-between items-center max-w-2xl  md:flex-row animate-fade-in">
+          <PokemonListing
+            pokemon={firstPokemon.data}
+            vote={() => voteForRoundest(first)}
+          />
+          <div className="p-8">Vs</div>
+          <PokemonListing
+            pokemon={secondPokemon.data}
+            vote={() => voteForRoundest(second)}
+          />
+          <div className="p-2" />
+        </div>
+      )}
+      {!dataLoaded && <img src="/grid.svg" />}
+      <div className="w-full text-xl text-center pb-2">
         <a href="https://github.com/galortega/roundest-mon">Github</a>
         {" | "}
         <Link href="/results">
