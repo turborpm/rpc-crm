@@ -5,11 +5,16 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { LockOutlined } from "@ant-design/icons";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-const btn =
-  "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
+const btnPrimary =
+  "inline-block rounded-sm font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-gray-400 border-gray-400 hover:bg-gray-600 hover:border-gray-600";
+const btnSecondary =
+  "inline-block rounded-sm font-medium border border-solid text-center py-1 px-2 text-blue-400 bg-transparent border-blue-400 hover:bg-blue-400 hover:border-blue-400";
 
 const Home: NextPage = () => {
+  const { data: session } = useSession();
   const [ids, updateIds] = useState(() => getOptionsForVote());
   const [first, second] = ids;
 
@@ -34,34 +39,57 @@ const Home: NextPage = () => {
     secondPokemon.data;
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
+    <>
       <Head>
         <title>Roundest Pokemon</title>
       </Head>
-      <div className="text-2xl text-center pt-8">Which Pokémon is Rounder?</div>
-      {dataLoaded && (
-        <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
-          <PokemonListing
-            pokemon={firstPokemon.data}
-            vote={() => voteForRoundest(first)}
-          />
-          <div className="p-8">Vs</div>
-          <PokemonListing
-            pokemon={secondPokemon.data}
-            vote={() => voteForRoundest(second)}
-          />
-          <div className="md:p-2" />
+      <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
+        <div className="w-screen flex items-center pt-8 px-6 static">
+          <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
+          <button
+            className={`hidden md:inline-block absolute right-12 ${btnSecondary}`}
+            onClick={() => signIn()}
+          >
+            <div className="flex items-center">
+              <LockOutlined className="mr-2" />
+              Login
+            </div>
+          </button>
         </div>
-      )}
-      {!dataLoaded && <img src="/grid.svg" />}
-      <div className="w-full text-xl text-center pb-2">
-        <a href="https://github.com/galortega/roundest-mon">Github</a>
-        {" | "}
-        <Link href="/results">
-          <a>Results</a>
-        </Link>
+
+        {dataLoaded && (
+          <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
+            <PokemonListing
+              pokemon={firstPokemon.data}
+              vote={() => voteForRoundest(first)}
+            />
+            <div className="p-8">Vs</div>
+            <PokemonListing
+              pokemon={secondPokemon.data}
+              vote={() => voteForRoundest(second)}
+            />
+            <div className="md:p-2" />
+          </div>
+        )}
+        {!dataLoaded && <img src="/grid.svg" />}
+        <div className="w-full text-xl text-center pb-2">
+          <a href="https://github.com/galortega/roundest-mon">Github</a>
+          {" | "}
+          <Link href="/results">
+            <a>Results</a>
+          </Link>
+          <span className="md:hidden">
+            {" | "}
+            <button className={btnSecondary}>
+              <div className="flex items-center text-xs">
+                <LockOutlined className="mr-1" />
+                Login
+              </div>
+            </button>
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -82,7 +110,7 @@ const PokemonListing: React.FC<{
       <div className="text-xl text-center capitalize mt-[-2rem]">
         {props.pokemon.name}
       </div>
-      <button className={btn} onClick={() => props.vote()}>
+      <button className={btnPrimary} onClick={() => props.vote()}>
         Rounder
       </button>
     </div>
