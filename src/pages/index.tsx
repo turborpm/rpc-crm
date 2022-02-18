@@ -45,14 +45,19 @@ const Home: NextPage = () => {
       </Head>
       <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
         <div className="w-screen flex items-center pt-8 px-6 static">
-          <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
           {session && (
-            <img
-              className="hidden md:inline object-cover w-12 h-12 mr-2 rounded-full absolute left-12"
-              src={`${session?.user?.image}`}
-              alt="Profile image"
-            />
+            <div className="hidden md:inline object-cover mr-2 rounded-full absolute">
+              <Image
+                className="rounded-full"
+                src={`${session?.user?.image}`}
+                alt="Profile image"
+                layout="fixed"
+                height={42}
+                width={42}
+              />
+            </div>
           )}
+          <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
           <button
             className={`hidden md:inline-block absolute right-12 ${btnSecondary}`}
             onClick={() => (!session ? signIn() : signOut())}
@@ -87,14 +92,21 @@ const Home: NextPage = () => {
           </Link>
           <span className="md:hidden">
             {" | "}
-            <button className={btnSecondary}>
+            <button
+              className={btnSecondary}
+              onClick={() => (!session ? signIn() : signOut())}
+            >
               <div className="flex items-center text-xs">
                 {session ? (
-                  <img
-                    className="inline object-cover w-4 h-4 mr-2 rounded-full"
-                    src={`${session?.user?.image}`}
-                    alt="Profile image"
-                  />
+                  <div className="inline mr-2">
+                    <Image
+                      className="object-cover rounded-full"
+                      src={`${session?.user?.image}`}
+                      alt="Profile image"
+                      height={18}
+                      width={18}
+                    />
+                  </div>
                 ) : (
                   <LockOutlined className="mr-1" />
                 )}
