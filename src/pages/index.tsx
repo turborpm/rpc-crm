@@ -46,9 +46,16 @@ const Home: NextPage = () => {
       <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
         <div className="w-screen flex items-center pt-8 px-6 static">
           <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
+          {session && (
+            <img
+              className="hidden md:inline object-cover w-12 h-12 mr-2 rounded-full absolute left-12"
+              src={`${session?.user?.image}`}
+              alt="Profile image"
+            />
+          )}
           <button
             className={`hidden md:inline-block absolute right-12 ${btnSecondary}`}
-            onClick={() => !session ? signIn() : signOut()}
+            onClick={() => (!session ? signIn() : signOut())}
           >
             <div className="flex items-center">
               <LockOutlined className="mr-2" />
@@ -82,8 +89,16 @@ const Home: NextPage = () => {
             {" | "}
             <button className={btnSecondary}>
               <div className="flex items-center text-xs">
-                <LockOutlined className="mr-1" />
-                Login
+                {session ? (
+                  <img
+                    className="inline object-cover w-4 h-4 mr-2 rounded-full"
+                    src={`${session?.user?.image}`}
+                    alt="Profile image"
+                  />
+                ) : (
+                  <LockOutlined className="mr-1" />
+                )}
+                {session ? "Sign Out" : "Sign In"}
               </div>
             </button>
           </span>
