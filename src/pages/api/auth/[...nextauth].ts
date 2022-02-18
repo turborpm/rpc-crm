@@ -36,10 +36,10 @@ export default NextAuth({
             clientId: `${GOOGLE_CLIENT_ID}`,
             clientSecret: `${GOOGLE_CLIENT_SECRET}`,
           }),
-          FacebookProvider({
-            clientId: `${process.env.FACEBOOK_ID}`,
-            clientSecret: `${process.env.FACEBOOK_SECRET}`,
-          }),
+          // FacebookProvider({
+          //   clientId: `${process.env.FACEBOOK_ID}`,
+          //   clientSecret: `${process.env.FACEBOOK_SECRET}`,
+          // }),
           // ...add more providers here
         ],
   pages: {
