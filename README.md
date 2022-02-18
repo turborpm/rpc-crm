@@ -1,8 +1,17 @@
 <!-- TODO
     [] implementar login con nextauth (google/facebook)
-    [] guardar el usuario que ha votado
-        [] crear modelo User en el schema
+        [] setear nextauth
+        [] botones de login en el home
+        [] página de inicio de sesión
+        [] iniciar sesión con google
+        [] deploy
+            [] resolver error (nextauth client fetch error) en preview y production
+            [] iniciar sesión con google en preview y desarrollo
+    [] guardar el usuario que ha votado (https://github.com/hexrcs/prisma-next-auth)
+        [] crear modelos en el schema
+        [] guardar en db al hacer signin
         [] unir al usuario en el modelo Vote
+        [] guardar voto en db
     [] vista para revisar votaciones por usuario
     [] implementar chat app con websockets https://github.com/trpc/examples-next-prisma-starter-websockets
  -->
