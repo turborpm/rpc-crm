@@ -8,6 +8,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
+declare module "next-auth" {
+  interface Session {
+    userId: string;
+  }
+}
+
 export default NextAuth({
   // Configure one or more authentication providers
   providers:
@@ -49,5 +55,11 @@ export default NextAuth({
     signIn: "/auth/signin",
   },
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    async session({ session, user }) {
+      session.userId = user.id;
+      return session;
+    },
+  },
   secret: process.env.SECRET,
 });

@@ -25,9 +25,17 @@ const Home: NextPage = () => {
 
   const voteForRoundest = (selected: number) => {
     if (selected === first)
-      voteMutation.mutate({ votedFor: first, votedAgainst: second });
+      voteMutation.mutate({
+        userId: session?.userId,
+        votedFor: first,
+        votedAgainst: second,
+      });
     else if (selected === second)
-      voteMutation.mutate({ votedFor: second, votedAgainst: first });
+      voteMutation.mutate({
+        userId: session?.userId,
+        votedFor: second,
+        votedAgainst: first,
+      });
 
     updateIds(getOptionsForVote());
   };
@@ -37,6 +45,8 @@ const Home: NextPage = () => {
     firstPokemon.data &&
     !secondPokemon.isLoading &&
     secondPokemon.data;
+
+  console.log(session);
 
   return (
     <>
