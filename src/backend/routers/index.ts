@@ -1,7 +1,6 @@
+import { prisma } from "@/backend/utils/prisma";
 import * as trpc from "@trpc/server";
 import { z } from "zod";
-import { prisma } from "@/backend/utils/prisma";
-import { TRPC_ERROR_CODES_BY_KEY } from "@trpc/server/rpc";
 
 export const appRouter = trpc
   .router()
@@ -22,10 +21,12 @@ export const appRouter = trpc
     input: z.object({
       votedFor: z.number(),
       votedAgainst: z.number(),
+      userId: z.string().optional(),
     }),
     async resolve({ input }) {
       const voteInDb = await prisma.vote.create({
         data: {
+          userId: input.userId,
           votedAgainstId: input.votedAgainst,
           votedForId: input.votedFor,
         },

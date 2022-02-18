@@ -2,7 +2,10 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
 export default NextAuth({
@@ -45,5 +48,6 @@ export default NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
+  adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
 });
