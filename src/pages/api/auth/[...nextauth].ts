@@ -8,9 +8,9 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 export default NextAuth({
   // Configure one or more authentication providers
   providers:
-    // process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "test"
-    //   ? [
-        [  CredentialsProvider({
+    process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "test"
+      ? [
+          CredentialsProvider({
             name: "Credentials",
             credentials: {
               username: {
@@ -30,20 +30,20 @@ export default NextAuth({
               };
             },
           }),
+        ]
+      : [
+          GoogleProvider({
+            clientId: `${GOOGLE_CLIENT_ID}`,
+            clientSecret: `${GOOGLE_CLIENT_SECRET}`,
+          }),
+          FacebookProvider({
+            clientId: `${process.env.FACEBOOK_ID}`,
+            clientSecret: `${process.env.FACEBOOK_SECRET}`,
+          }),
+          // ...add more providers here
         ],
-      // : [
-      //     GoogleProvider({
-      //       clientId: `${GOOGLE_CLIENT_ID}`,
-      //       clientSecret: `${GOOGLE_CLIENT_SECRET}`,
-      //     }),
-      //     // FacebookProvider({
-      //     //   clientId: `${process.env.FACEBOOK_ID}`,
-      //     //   clientSecret: `${process.env.FACEBOOK_SECRET}`,
-      //     // }),
-      //     // ...add more providers here
-      //   ],
-  pages: {
-    signIn: "/auth/signin",
-  },
+  // pages: {
+  //   signIn: "/auth/signin",
+  // },
   secret: process.env.SECRET,
 });
