@@ -1,3 +1,22 @@
+<!-- TODO
+    [] implementar login con nextauth (google/facebook)
+    [] guardar el usuario que ha votado
+        [] crear modelo User en el schema
+        [] unir al usuario en el modelo Vote
+    [] vista para revisar votaciones por usuario
+    [] implementar chat app con websockets https://github.com/trpc/examples-next-prisma-starter-websockets
+ -->
+
+ <!-- Implementar ecommerce con turborepo
+    prisma, trpc, nextjs, tailwind, planetscale (mysql), typescript, turborepo
+    4 aplicaciones web: 
+        1. backend con prisma y trpc (compartido entre los otros dos proyectos)
+        2. sitio de proveedor
+        3. sitio de cliente (pwa https://blog.jarrodwatts.com/how-i-released-a-next-js-app-to-the-google-play-store-with-aws-amplify)
+        4. sitio de admin
+  -->
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

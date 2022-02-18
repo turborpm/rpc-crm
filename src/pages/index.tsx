@@ -48,11 +48,11 @@ const Home: NextPage = () => {
           <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
           <button
             className={`hidden md:inline-block absolute right-12 ${btnSecondary}`}
-            onClick={() => signIn()}
+            onClick={() => !session ? signIn() : signOut()}
           >
             <div className="flex items-center">
               <LockOutlined className="mr-2" />
-              Login
+              {session ? "Sign Out" : "Sign In"}
             </div>
           </button>
         </div>
