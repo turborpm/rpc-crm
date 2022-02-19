@@ -1,7 +1,9 @@
 import { getPokemonVotesByUser } from "@/utils/getPokemonVotesByUser";
 import { trpc } from "@/utils/trpc";
 import { AsyncReturnType } from "@/utils/ts-bs";
-import { useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
+import { Provider } from "next-auth/providers";
+import { getProviders, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
@@ -27,8 +29,11 @@ const PokemonListing: React.FC<{
   );
 };
 
-const ResultsPage: React.FC<{}> = () => {
+const ResultsPage: React.FC<{ providers: Provider[] }> = ({ providers }) => {
   const { data: session } = useSession();
+
+  if (!providers) return <img src="/grid.svg" />;
+
 
   if (!session) return <img src="/grid.svg" />;
 
@@ -41,7 +46,7 @@ const ResultsPage: React.FC<{}> = () => {
     <img src="/grid.svg" />
   ) : (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl capitalize">{session.user?.name}'s results</h2>
+      <h2 className="text-2xl capitalize">{session.user?.name}&apos results</h2>
       <div className="p-2" />
       <div className="flex flex-col w-full max-w-2xl border">
         {pokemons.map((currentPokemon, index) => (
@@ -53,3 +58,9 @@ const ResultsPage: React.FC<{}> = () => {
 };
 
 export default ResultsPage;
+
+export const getStaticProps: GetServerSideProps = async () => {
+  return {
+    props: { providers: await getProviders() },
+  };
+};
