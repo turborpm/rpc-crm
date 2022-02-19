@@ -1,9 +1,7 @@
 import { getPokemonVotesByUser } from "@/utils/getPokemonVotesByUser";
 import { trpc } from "@/utils/trpc";
 import { AsyncReturnType } from "@/utils/ts-bs";
-import { GetServerSideProps } from "next";
-import { Provider } from "next-auth/providers";
-import { getProviders, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
@@ -29,38 +27,31 @@ const PokemonListing: React.FC<{
   );
 };
 
-const ResultsPage: React.FC<{ providers: Provider[] }> = ({ providers }) => {
+const ResultsPage: React.FC<{}> = () => {
   const { data: session } = useSession();
-
-  if (!providers) return <img src="/grid.svg" />;
-
-
-  if (!session) return <img src="/grid.svg" />;
 
   const { data: pokemons } = trpc.useQuery([
     "get-pokemon-votes-by-user",
-    { userId: session.userId },
+    { userId: `${session?.userId}` },
   ]);
 
-  return !pokemons ? (
-    <img src="/grid.svg" />
-  ) : (
+  return (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl capitalize">{session.user?.name}&apos results</h2>
-      <div className="p-2" />
-      <div className="flex flex-col w-full max-w-2xl border">
-        {pokemons.map((currentPokemon, index) => (
-          <PokemonListing pokemon={currentPokemon} key={index} />
-        ))}
-      </div>
+      <h2 className="text-2xl capitalize">{session?.user?.name}&#39 results</h2>
+      {!pokemons || !session ? (
+        <img src="/grid.svg" />
+      ) : (
+        <>
+          <div className="p-2" />
+          <div className="flex flex-col w-full max-w-2xl border">
+            {pokemons.map((currentPokemon, index) => (
+              <PokemonListing pokemon={currentPokemon} key={index} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 export default ResultsPage;
-
-export const getStaticProps: GetServerSideProps = async () => {
-  return {
-    props: { providers: await getProviders() },
-  };
-};
