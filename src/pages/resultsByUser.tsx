@@ -37,7 +37,7 @@ const ResultsPage: React.FC<{}> = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl capitalize">{session?.user?.name}&#39 results</h2>
+      <h2 className="text-2xl capitalize">{session?.user?.name + "'s"} results</h2>
       {!pokemons || !session ? (
         <img src="/grid.svg" />
       ) : (
