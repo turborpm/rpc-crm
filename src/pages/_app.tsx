@@ -1,7 +1,8 @@
 import { AppRouter } from "@/backend/routers/index";
 import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
-
+import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
+import { loggerLink } from "@trpc/client/links/loggerLink";
 import { SessionProvider } from "next-auth/react";
 
 import "tailwindcss/tailwind.css";
@@ -42,10 +43,36 @@ export default withTRPC<AppRouter>({
       /**
        * @link https://trpc.io/docs/links
        */
+      links: [
+        // adds pretty logs to your console in development and logs errors in production
+        loggerLink({
+          enabled: (opts) =>
+            process.env.NODE_ENV === "development" ||
+            (opts.direction === "down" && opts.result instanceof Error),
+        }),
+        httpBatchLink({
+          url: `${getBaseUrl()}/api/trpc`,
+        }),
+      ],
     };
   },
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: false,
+  ssr: true,
+  /**
+   * Set headers or status code when doing SSR
+   */
+  responseMeta({ clientErrors }) {
+    if (clientErrors.length) {
+      // propagate http first error from API calls
+      return {
+        status: clientErrors[0].data?.httpStatus ?? 500,
+      };
+    }
+
+    // for app caching with SSR see https://trpc.io/docs/caching
+
+    return {};
+  },
 })(MyApp);

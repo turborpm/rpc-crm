@@ -100,6 +100,10 @@ const Home: NextPage = () => {
           <Link href="/results">
             <a>Results</a>
           </Link>
+          {" | "}
+          <Link href="/resultsByUser">
+            <a>My Results</a>
+          </Link>
           <span className="md:hidden">
             {" | "}
             <button

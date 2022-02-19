@@ -1,4 +1,5 @@
 import { prisma } from "@/backend/utils/prisma";
+import { getPokemonVotesByUser } from "@/utils/getPokemonVotesByUser";
 import * as trpc from "@trpc/server";
 import { z } from "zod";
 
@@ -15,6 +16,18 @@ export const appRouter = trpc
       if (!pokemon) throw new Error("Failed to find pokemon");
 
       return pokemon;
+    },
+  })
+  .query("get-pokemon-votes-by-user", {
+    input: z.object({
+      userId: z.string(),
+    }),
+    async resolve({ input }) {
+      const pokemons = getPokemonVotesByUser(input.userId);
+
+      if (!pokemons) throw new Error("Failed to find pokemons");
+
+      return pokemons;
     },
   })
   .mutation("cast-vote", {
