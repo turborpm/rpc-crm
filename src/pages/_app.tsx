@@ -1,8 +1,8 @@
-import { AppRouter } from "@/backend/routers/index";
+import { AppRouter } from "@/backend/routers/_app";
 import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
-import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
-import { loggerLink } from '@trpc/client/links/loggerLink';
+import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
+import { loggerLink } from "@trpc/client/links/loggerLink";
 import { SessionProvider } from "next-auth/react";
 
 import "tailwindcss/tailwind.css";
@@ -12,11 +12,7 @@ const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />{" "}
-    </SessionProvider>
-  );
+  return <Component {...pageProps} />;
 };
 
 function getBaseUrl() {

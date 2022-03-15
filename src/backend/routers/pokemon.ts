@@ -1,15 +1,14 @@
+import { createRouter } from "@/backend/createRouter";
 import { prisma } from "@/backend/utils/prisma";
 import { getPokemonVotesByUser } from "@/utils/getPokemonVotesByUser";
-import * as trpc from "@trpc/server";
 import { z } from "zod";
 
-export const appRouter = trpc
-  .router()
+export const router = createRouter()
   .query("get-pokemon-by-id", {
     input: z.object({
       id: z.number(),
     }),
-    async resolve({ input }) {
+    async resolve({ input, ctx }) {
       const pokemon = await prisma.pokemon.findFirst({
         where: { id: input.id },
       });
@@ -19,11 +18,9 @@ export const appRouter = trpc
     },
   })
   .query("get-pokemon-votes-by-user", {
-    input: z.object({
-      userId: z.string(),
-    }),
-    async resolve({ input }) {
-      const pokemons = getPokemonVotesByUser(input.userId);
+    async resolve({ input, ctx }) {
+      if (!ctx.session?.userId) throw new Error("Not logged in");
+      const pokemons = getPokemonVotesByUser(ctx.session?.userId || "");
 
       if (!pokemons) throw new Error("Failed to find pokemons");
 
@@ -34,12 +31,11 @@ export const appRouter = trpc
     input: z.object({
       votedFor: z.number(),
       votedAgainst: z.number(),
-      userId: z.string().optional(),
     }),
-    async resolve({ input }) {
+    async resolve({ input, ctx }) {
       const voteInDb = await prisma.vote.create({
         data: {
-          userId: input.userId,
+          userId: ctx.session?.userId,
           votedAgainstId: input.votedAgainst,
           votedForId: input.votedFor,
         },
@@ -47,6 +43,3 @@ export const appRouter = trpc
       return { success: true, vote: voteInDb };
     },
   });
-
-// export type definition of API
-export type AppRouter = typeof appRouter;

@@ -1,12 +1,19 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { prisma } from "@/backend/utils/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
 
-const prisma = new PrismaClient();
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+const {
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  VERCEL_ENV,
+  NODE_ENV,
+  FACEBOOK_ID,
+  FACEBOOK_SECRET,
+  SECRET,
+} = process.env;
 
 declare module "next-auth" {
   interface Session {
@@ -14,10 +21,10 @@ declare module "next-auth" {
   }
 }
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers:
-    process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "test"
+    VERCEL_ENV === "preview" || NODE_ENV === "test"
       ? [
           CredentialsProvider({
             name: "Credentials",
@@ -46,8 +53,8 @@ export default NextAuth({
             clientSecret: `${GOOGLE_CLIENT_SECRET}`,
           }),
           FacebookProvider({
-            clientId: `${process.env.FACEBOOK_ID}`,
-            clientSecret: `${process.env.FACEBOOK_SECRET}`,
+            clientId: `${FACEBOOK_ID}`,
+            clientSecret: `${FACEBOOK_SECRET}`,
           }),
           // ...add more providers here
         ],
@@ -61,5 +68,7 @@ export default NextAuth({
       return session;
     },
   },
-  secret: process.env.SECRET,
-});
+  secret: SECRET,
+};
+
+export default NextAuth(authOptions);

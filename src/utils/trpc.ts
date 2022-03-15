@@ -1,5 +1,5 @@
 // utils/trpc.ts
-import { AppRouter } from "@/backend/routers/index";
+import { AppRouter } from "@/backend/routers/_app";
 import { createReactQueryHooks } from "@trpc/react";
 import type { inferProcedureOutput } from "@trpc/server";
 

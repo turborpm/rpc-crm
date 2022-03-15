@@ -5,8 +5,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { LockOutlined } from "@ant-design/icons";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { LockOutlined, MenuOutlined } from "@ant-design/icons";
+import { signIn, signOut } from "next-auth/react";
 
 const btnPrimary =
   "inline-block rounded-sm font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-gray-400 border-gray-400 hover:bg-gray-600 hover:border-gray-600";
@@ -14,7 +14,7 @@ const btnSecondary =
   "inline-block rounded-sm font-medium border border-solid text-center py-1 px-2 text-blue-400 bg-transparent border-blue-400 hover:bg-blue-400 hover:border-blue-400";
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
+  const { data: session } = trpc.useQuery(["next-auth.getSession"]);
   const [ids, updateIds] = useState(() => getOptionsForVote());
   const [first, second] = ids;
 
@@ -22,17 +22,14 @@ const Home: NextPage = () => {
   const secondPokemon = trpc.useQuery(["get-pokemon-by-id", { id: second }]);
 
   const voteMutation = trpc.useMutation(["cast-vote"]);
-
   const voteForRoundest = (selected: number) => {
     if (selected === first)
       voteMutation.mutate({
-        userId: session?.userId,
         votedFor: first,
         votedAgainst: second,
       });
     else if (selected === second)
       voteMutation.mutate({
-        userId: session?.userId,
         votedFor: second,
         votedAgainst: first,
       });
@@ -40,13 +37,11 @@ const Home: NextPage = () => {
     updateIds(getOptionsForVote());
   };
 
-  const dataLoaded =
+  const isDataLoaded =
     !firstPokemon.isLoading &&
     firstPokemon.data &&
     !secondPokemon.isLoading &&
     secondPokemon.data;
-
-  console.log(session);
 
   return (
     <>
@@ -77,9 +72,10 @@ const Home: NextPage = () => {
               {session ? "Sign Out" : "Sign In"}
             </div>
           </button>
+          <MenuOutlined className="bottom-12 right-8 md:bottom-4 md:right-12 bg-red-400 p-3 rounded-full absolute drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300" />
         </div>
 
-        {dataLoaded && (
+        {isDataLoaded && (
           <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
             <PokemonListing
               pokemon={firstPokemon.data}
@@ -93,7 +89,7 @@ const Home: NextPage = () => {
             <div className="md:p-2" />
           </div>
         )}
-        {!dataLoaded && <img src="/grid.svg" />}
+        {!isDataLoaded && <img src="/grid.svg" />}
         <div className="w-full text-xl text-center pb-2">
           <a href="https://github.com/galortega/roundest-mon">Github</a>
           {" | "}
@@ -147,7 +143,9 @@ const PokemonListing: React.FC<{
         layout="fixed"
         width={256}
         height={256}
+        alt={props.pokemon.name}
       />
+
       <div className="text-xl text-center capitalize mt-[-2rem]">
         {props.pokemon.name}
       </div>
