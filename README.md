@@ -1,29 +1,97 @@
+Misión: encontrar al pokemón más redondo a través de la sabiduría de las masas.
+Tecnolgías: 
+    implementadas
+    *   nextjs
+    *   typescript
+    *   tailwind
+    *   trpc
+    *   prisma
+    *   planetscale (mysql)
+    *   next-auth
+
+    por implementar:
+    *   websockets
+    *   turborepo
+    *   pwa
+    *   livepeer
+    *   web3
+    *   stacks
+    *   lightning
+    *   storybook
+    *   algo para testing
+
+
 <!-- TODO
-    [] implementar login con nextauth (google/facebook)
-        [] setear nextauth
-        [] botones de login en el home
-        [] página de inicio de sesión
-        [] iniciar sesión con google
-        [] deploy
-            [] resolver error (nextauth client fetch error) en preview y production
-            [] iniciar sesión con google en preview y desarrollo
-    [] guardar el usuario que ha votado (https://github.com/hexrcs/prisma-next-auth)
-        [] crear modelos en el schema
-        [] guardar en db al hacer signin
-        [] unir al usuario en el modelo Vote
-        [] guardar voto en db
-    [] vista para revisar votaciones por usuario
-    [] implementar chat app con websockets https://github.com/trpc/examples-next-prisma-starter-websockets
+    // ÉPICA 0
+    [x] implementar esto: https://www.youtube.com/watch?v=PKy2lYEnhgs&t=5025s 
+
+    // ÉPICA I
+    [x] implementar login con nextauth (google/facebook)
+        [x] setear nextauth
+        [x] botones de login en el home
+        [x] página de inicio de sesión
+        [x] iniciar sesión con google
+        [x] deploy
+            [x] resolver error (nextauth client fetch error) en preview y production
+            [x] iniciar sesión con google en preview y desarrollo
+        [x] iniciar sesión con fb, github, discord, telegram.
+    [x] guardar el usuario que ha votado (https://github.com/hexrcs/prisma-next-auth)
+        [x] crear modelos en el schema
+        [x] guardar en db al hacer signin
+        [x] unir al usuario en el modelo Vote
+        [x] guardar voto en db
+    [x] vista para revisar votaciones por usuario
+
+    // ÉPICA II
+    [x] usar next-auth con trpc. https://kitchen-sink.trpc.io/next-auth
+        [x]  implementar optimizaciones
+        [x]  debuggear
+        [x]  usar el context para llamadas al api
+    [] refactorizar todo el código
+        [x] extraer PokemonListing
+        []  usar hooks para todo lo que se pueda usar hooks
+        []  crear layout reutilizable
+        []  mejorar la estructura de archivos, buscar ejemplos para buenas prácticas
+    []  mejorar el layout para pc
+    []  mejorar el layout para móvil
+    [] agregar un buscador por usuario, pokemon
+        [] usar un hook
+        [] implementar debounce para hacer la busqueda con cada debounce
+        [] optimizar la búsqueda y usar suspense
+    []  implementar paginación de resultados
+        []  usar suspense para resultados
+    []  implementar un formulario con hooks
+        []  npm i react-hook-form
+        []  implementar useForm propio
+    []  implementar animaciones con tailwind y framer-motion
+    []  aparecer easter egg al copiar texto
+    
+
+
+    Futuras Épicas:
+    []  Crear más secciones
+        []  Crear sistema por roles
+        []  Crear secciones informativas
+        []  Crear secciones interactivas (ej: batalla pokemon)
+    []  Implementar chat app con websockets https://github.com/trpc/examples-next-prisma-starter-websockets
+        []  encontrar más casos de uso (ej: tweets)
+    []  Aprovechar lo que más pueda a react18
+    []  Crear pwa para pc y móvil. pwa https://blog.jarrodwatts.com/how-i-released-a-next-js-app-to-the-google-play-store-with-aws-amplify
+    []  Crear un monorepo con turborepo para hacer varias aplicaciones que se conecten a un mismo backend tRPC
+    []  Implementar funcionalidad de videollamadas usando livepeer
+    []  Implementar funcionalidades de web3
  -->
 
- <!-- Implementar ecommerce con turborepo
+
+<!-- Siguiente: Implementar ecommerce con turborepo
     prisma, trpc, nextjs, tailwind, planetscale (mysql), typescript, turborepo
     4 aplicaciones web: 
         1. backend con prisma y trpc (compartido entre los otros dos proyectos)
         2. sitio de proveedor
         3. sitio de cliente (pwa https://blog.jarrodwatts.com/how-i-released-a-next-js-app-to-the-google-play-store-with-aws-amplify)
         4. sitio de admin
-  -->
+-->
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -42,7 +110,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). API endpoints can be edited in `backend/routers`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
@@ -55,8 +123,11 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deploy  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm run start
+```
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
