@@ -19,6 +19,7 @@ Tecnolgías:
     *   lightning
     *   storybook
     *   algo para testing
+    *   algo para AI
 
 
 <!-- TODO
@@ -69,16 +70,17 @@ Tecnolgías:
 
 
     Futuras Épicas:
-    []  Crear más secciones
+    []  Crear más secciones informativas
         []  Crear sistema por roles
         []  Crear secciones informativas
-        []  Crear secciones interactivas (ej: batalla pokemon)
+    []  Como usuario quiero batallar mis pokemon contra otro usuario
     []  Implementar chat app con websockets https://github.com/trpc/examples-next-prisma-starter-websockets
         []  encontrar más casos de uso (ej: tweets)
     []  Aprovechar lo que más pueda a react18
     []  Crear pwa para pc y móvil. pwa https://blog.jarrodwatts.com/how-i-released-a-next-js-app-to-the-google-play-store-with-aws-amplify
     []  Crear un monorepo con turborepo para hacer varias aplicaciones que se conecten a un mismo backend tRPC
     []  Implementar funcionalidad de videollamadas usando livepeer
+    []  Como usuario quiero batallar mis pokemon contra la AI
     []  Implementar funcionalidades de web3
  -->
 
