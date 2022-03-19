@@ -51,7 +51,8 @@ const ResultsPage: React.FC<{}> = () => {
           {(session && session?.user?.name) || "User"}&apos;s results
         </h2>
         {!pokemons || !session ? (
-          <img src="/grid.svg" className="my-auto" />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/grid.svg" className="my-auto invert" alt="loading" />
         ) : (
           <>
             <div className="p-2" />

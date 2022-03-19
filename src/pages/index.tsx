@@ -14,13 +14,13 @@ const Home: NextPage = () => {
     <Layout session={session}>
       <>
         {firstPokemon && secondPokemon ? (
-          <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
+          <div className="bg-white shadow-2xl shadow-black border-2 border-black rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
             <PokemonListing
               pokemon={firstPokemon}
               vote={() => voteForRoundest(firstPokemon.id)}
               disabled={fetchingNext}
             />
-            <div className="p-8">Vs</div>
+            <div className="p-8 font-bold underline underline-offset-2 decoration-2 decoration-pink-600">Vs</div>
             <PokemonListing
               pokemon={secondPokemon}
               vote={() => voteForRoundest(secondPokemon.id)}
@@ -29,7 +29,8 @@ const Home: NextPage = () => {
             <div className="md:p-2" />
           </div>
         ) : (
-          <img src="/grid.svg" />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/grid.svg" alt="loading" className="invert"/>
         )}
       </>
     </Layout>

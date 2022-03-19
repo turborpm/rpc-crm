@@ -26,9 +26,9 @@ const Providers: React.FC<{ providers: Provider[] }> = ({ providers }) => {
           >
             <div className="flex items-center">
               {provider.id === "google" ? (
-                <GoogleOutlined className="text-2xl text-white" />
+                <GoogleOutlined className="text-2xl " />
               ) : (
-                <FacebookOutlined className="text-2xl text-white" />
+                <FacebookOutlined className="text-2xl " />
               )}
               <p className="text-base font-medium ml-4 text-gray-400">
                 Continue with {provider.name}
@@ -48,17 +48,17 @@ const SignInPage: React.FC<{ providers: Provider[] }> = ({ providers }) => {
       <Head>Roundest Mon</Head>
       <div className="h-screen w-full py-16 px-4">
         <div className="flex flex-col items-center justify-center">
-          <LoginOutlined className="text-8xl" />
-          <p className="tracking-widest p-6 text-2xl">Roundest Mon</p>
-          <div className="bg-gray-900 border-gray-900 border-2  shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
-            <p className="focus:outline-none text-2xl font-extrabold leading-6 text-white">
+          <LoginOutlined className="text-8xl drop-shadow-2xl" />
+          <p className="tracking-widest p-6 text-2xl drop-shadow-2xl">Roundest Mon</p>
+          <div className="bg-white shadow-2xl border-black border-2 rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
+            <p className="focus:outline-none text-2xl font-extrabold leading-6 ">
               Login to your account
             </p>
             <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
               Dont have account?{" "}
               <button
                 onClick={() => signIn()}
-                className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-white cursor-pointer"
+                className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none   cursor-pointer"
               >
                 {" "}
                 Sign up here
