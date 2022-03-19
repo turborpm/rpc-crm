@@ -7,7 +7,7 @@ import Link from "next/link";
 import React from "react";
 
 const btnSecondary =
-  "inline-block rounded-sm font-medium border border-solid text-center py-1 px-2 text-pink-600 bg-transparent border-pink-600 border-2 hover:bg-pink-600 hover:border-pink-700 hover:text-white";
+  "inline-block font-medium border border-solid text-center py-1 px-2 text-pink-600 bg-transparent border-pink-600 border-2 hover:bg-pink-600 hover:border-pink-700 hover:text-white";
 
 const Layout: React.FC<{
   session: Session | null | undefined;
@@ -21,7 +21,7 @@ const Layout: React.FC<{
       <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
         <div className="w-screen flex items-center pt-8 px-6 pb-6 static border-b-2 border-black">
           {session && (
-            <div className="hidden md:inline object-cover mr-2 rounded-full absolute">
+            <div className="hidden md:inline object-cover mr-2 absolute">
               <Image
                 className="rounded-full"
                 src={`${session?.user?.image}`}

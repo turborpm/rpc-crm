@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     <Layout session={session}>
       <>
         {firstPokemon && secondPokemon ? (
-          <div className="bg-white shadow-2xl shadow-black border-2 border-black rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
+          <div className="bg-white shadow-2xl shadow-black border-2 border-black flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
             <PokemonListing
               pokemon={firstPokemon}
               vote={() => voteForRoundest(firstPokemon.id)}

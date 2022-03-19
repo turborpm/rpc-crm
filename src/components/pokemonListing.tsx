@@ -2,7 +2,7 @@ import { inferQueryResponse } from "@/utils/trpc";
 import Image from "next/image";
 
 const btnPrimary =
-  "inline-block rounded-sm font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-pink-600 border-gray-400 hover:bg-gray-600";
+  "inline-block font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-pink-600 border-pink-600 hover:bg-white hover:text-pink-600";
 
 type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
 

@@ -17,7 +17,7 @@ const Providers: React.FC<{ providers: Provider[] }> = ({ providers }) => {
           <button
             aria-label="Continue with google"
             role="button"
-            className="hover:outline-none hover:ring-2 hover:ring-offset-1 hover:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
+            className="hover:outline-none hover:ring-2 hover:ring-black py-3.5 px-4 border border-black flex items-center w-full mt-10"
             onClick={() =>
               signIn(provider.id, {
                 callbackUrl: `${window.location.origin}/`,
