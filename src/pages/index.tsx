@@ -7,42 +7,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { LockOutlined, MenuOutlined } from "@ant-design/icons";
 import { signIn, signOut } from "next-auth/react";
+import PokemonListing from "@/components/pokemonListing";
+import { usePlausible } from "next-plausible";
+import { useGetPokemonPair } from "@/utils/useGetPokemonPair";
 
-const btnPrimary =
-  "inline-block rounded-sm font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-gray-400 border-gray-400 hover:bg-gray-600 hover:border-gray-600";
 const btnSecondary =
   "inline-block rounded-sm font-medium border border-solid text-center py-1 px-2 text-blue-400 bg-transparent border-blue-400 hover:bg-blue-400 hover:border-blue-400";
 
 const Home: NextPage = () => {
   const { data: session } = trpc.useQuery(["next-auth.getSession"]);
-  const [ids, updateIds] = useState(() => getOptionsForVote());
-  const [first, second] = ids;
-
-  const firstPokemon = trpc.useQuery(["get-pokemon-by-id", { id: first }]);
-  const secondPokemon = trpc.useQuery(["get-pokemon-by-id", { id: second }]);
-
-  const voteMutation = trpc.useMutation(["cast-vote"]);
-  const voteForRoundest = (selected: number) => {
-    if (selected === first)
-      voteMutation.mutate({
-        votedFor: first,
-        votedAgainst: second,
-      });
-    else if (selected === second)
-      voteMutation.mutate({
-        votedFor: second,
-        votedAgainst: first,
-      });
-
-    updateIds(getOptionsForVote());
-  };
-
-  const isDataLoaded =
-    !firstPokemon.isLoading &&
-    firstPokemon.data &&
-    !secondPokemon.isLoading &&
-    secondPokemon.data;
-
+  const { firstPokemon, secondPokemon, voteForRoundest, fetchingNext } =
+    useGetPokemonPair();
+    
   return (
     <>
       <Head>
@@ -75,21 +51,23 @@ const Home: NextPage = () => {
           <MenuOutlined className="bottom-12 right-8 md:bottom-4 md:right-12 bg-red-400 p-3 rounded-full absolute drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300" />
         </div>
 
-        {isDataLoaded && (
+        {firstPokemon && secondPokemon && (
           <div className="border rounded flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
             <PokemonListing
-              pokemon={firstPokemon.data}
-              vote={() => voteForRoundest(first)}
+              pokemon={firstPokemon}
+              vote={() => voteForRoundest(firstPokemon.id)}
+              disabled={fetchingNext}
             />
             <div className="p-8">Vs</div>
             <PokemonListing
-              pokemon={secondPokemon.data}
-              vote={() => voteForRoundest(second)}
+              pokemon={secondPokemon}
+              vote={() => voteForRoundest(secondPokemon.id)}
+              disabled={fetchingNext}
             />
             <div className="md:p-2" />
           </div>
         )}
-        {!isDataLoaded && <img src="/grid.svg" />}
+        {!(firstPokemon && secondPokemon) && <img src="/grid.svg" />}
         <div className="w-full text-xl text-center pb-2">
           <a href="https://github.com/galortega/roundest-mon">Github</a>
           {" | "}
@@ -127,32 +105,6 @@ const Home: NextPage = () => {
         </div>
       </div>
     </>
-  );
-};
-
-type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
-
-const PokemonListing: React.FC<{
-  pokemon: PokemonFromServer;
-  vote: () => void;
-}> = (props) => {
-  return (
-    <div className="flex flex-col items-center">
-      <Image
-        src={props.pokemon.spriteUrl}
-        layout="fixed"
-        width={256}
-        height={256}
-        alt={props.pokemon.name}
-      />
-
-      <div className="text-xl text-center capitalize mt-[-2rem]">
-        {props.pokemon.name}
-      </div>
-      <button className={btnPrimary} onClick={() => props.vote()}>
-        Rounder
-      </button>
-    </div>
   );
 };
 
