@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       <>
         {firstPokemon && secondPokemon ? (
           <>
-            <div className="hidden relative bg-white shadow-2xl shadow-black border-2 border-black md:flex justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
+            <div className="hidden md:flex my-4 relative bg-white shadow-2xl shadow-black border-2 border-black justify-between items-center max-w-2xl flex-col sm:p-4 md:flex-row animate-fade-in p-8">
               <div className="absolute -right-2 -bottom-2 bg-black h-full w-full -z-50" />
               <PokemonListing
                 pokemon={firstPokemon}
