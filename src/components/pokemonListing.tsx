@@ -13,8 +13,12 @@ const PokemonListing: React.FC<{
 }> = (props) => {
   return (
     <div className="isolate">
-      <div className="relative items-center hover:ring-1 ring-black hover:saturate-200">
-        <div className="absolute -right-1 -bottom-1 bg-black h-full w-full -z-50" />
+      <div
+        className={`relative items-center hover:ring-1 ring-black hover:saturate-200 ${
+          props.disabled && "opacity-50"
+        }`}
+      >
+        <div className="absolute -right-2 -bottom-2 bg-black h-full w-full -z-50" />
         <div className="divide-y-2 divide-black bg-white  border-2 border-black">
           <Image
             src={props.pokemon.spriteUrl}
@@ -33,7 +37,11 @@ const PokemonListing: React.FC<{
               &nbsp; 100% (23)
             </div>
             <div className="p-2">
-              <button className={btnPrimary} onClick={() => props.vote()}>
+              <button
+                className={btnPrimary}
+                onClick={() => props.vote()}
+                disabled={props.disabled}
+              >
                 Rounder
               </button>
             </div>
