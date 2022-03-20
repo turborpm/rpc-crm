@@ -31,7 +31,7 @@ const Home: NextPage = () => {
                 disabled={fetchingNext}
               />
             </div>
-            <div className="md:hidden my-2 justify-between items-center flex flex-col">
+            <div className="md:hidden my-1 justify-between items-center flex flex-col">
               <PokemonListing
                 pokemon={firstPokemon}
                 vote={() => voteForRoundest(firstPokemon.id)}
@@ -46,7 +46,6 @@ const Home: NextPage = () => {
                 disabled={fetchingNext}
               />
             </div>
-            <div className="p-1" />
           </>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
