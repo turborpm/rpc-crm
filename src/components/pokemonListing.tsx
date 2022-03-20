@@ -12,27 +12,32 @@ const PokemonListing: React.FC<{
   disabled: boolean;
 }> = (props) => {
   return (
-    <div className="flex flex-col items-center border-2 border-black divide-y-2 divide-black hover:ring-1 ring-black hover:saturate-200">
-      <Image
-        src={props.pokemon.spriteUrl}
-        layout="fixed"
-        width={256}
-        height={256}
-        alt={props.pokemon.name}
-      />
+    <div className="isolate">
+      <div className="relative items-center hover:ring-1 ring-black hover:saturate-200">
+        <div className="absolute -right-1 -bottom-1 bg-black h-full w-full -z-50" />
+        <div className="divide-y-2 divide-black bg-white  border-2 border-black">
+          <Image
+            src={props.pokemon.spriteUrl}
+            layout="fixed"
+            width={256}
+            height={256}
+            alt={props.pokemon.name}
+          />
 
-      <div className="text-xl text-center tracking-widest capitalize mt-[-2rem] w-full p-2">
-        {props.pokemon.name}
-      </div>
-      <div className="grid grid-cols-3  divide-x-2 divide-black w-full">
-        <div className="col-span-2 p-2 align-middle flex">
-          <div className="w-5 h-5 rounded-full bg-black" />
-          &nbsp; 100% (23)
-        </div>
-        <div className="p-2">
-          <button className={btnPrimary} onClick={() => props.vote()}>
-            Rounder
-          </button>
+          <div className="text-xl text-center tracking-widest capitalize mt-[-2rem] w-full p-2">
+            {props.pokemon.name}
+          </div>
+          <div className="grid grid-cols-3  divide-x-2 divide-black w-full">
+            <div className="col-span-2 p-2 align-middle flex">
+              <div className="w-5 h-5 rounded-full bg-black" />
+              &nbsp; 100% (23)
+            </div>
+            <div className="p-2">
+              <button className={btnPrimary} onClick={() => props.vote()}>
+                Rounder
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
