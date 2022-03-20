@@ -19,7 +19,7 @@ const Layout: React.FC<{
         <title>Roundest Pokemon</title>
       </Head>
       <div className="h-screen w-screen flex flex-col justify-between align-center items-center">
-        <div className="w-screen flex items-center pt-8 px-6 pb-6 static border-b-2 border-black">
+        <div className="w-screen flex items-center py-1 md:py-8 px-6 static border-b-2 border-black">
           {session && (
             <div className="hidden md:inline object-cover mr-2 absolute">
               <Image

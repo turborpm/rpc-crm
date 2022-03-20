@@ -14,17 +14,17 @@ const PokemonListing: React.FC<{
   return (
     <div className="isolate">
       <div
-        className={`relative items-center hover:ring-1 ring-black hover:saturate-200 ${
+        className={`relative hover:ring-1 ring-black hover:saturate-200 ${
           props.disabled && "opacity-50"
         }`}
       >
         <div className="absolute -right-2 -bottom-2 bg-black h-full w-full -z-50" />
-        <div className="divide-y-2 divide-black bg-white  border-2 border-black">
+        <div className="divide-y-2 divide-black bg-white  border-2 border-black items-center">
           <Image
             src={props.pokemon.spriteUrl}
             layout="fixed"
             width={256}
-            height={256}
+            height={200}
             alt={props.pokemon.name}
           />
 
