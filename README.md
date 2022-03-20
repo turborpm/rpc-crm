@@ -102,6 +102,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         [x]  implementar llamadas a next-auth por medio de trpc
         [x]  debuggear
         [x]  usar el context para llamadas al api
+    []  mejoras visuales
+        [x]  seleccionar colores para el tema claro
+        [x]  mejorar presentación del home en pc
+        []  mejorar presentación del home para móvil
+        []  mejorar presentación de resultados para móvil y pc
+        []  mejorar presentación de login para móvil y pc
+        []  agregar switch de tema oscuro
     [] refactorizar todo el código
         [x] extraer PokemonListing
         []  usar hooks para todo lo que se pueda usar hooks
