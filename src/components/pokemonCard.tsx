@@ -1,12 +1,11 @@
-import { inferQueryResponse } from "@/utils/trpc";
+import { generateCountPercent } from "@/utils/generateCountPercent";
+import { PokemonFromServer } from "@/utils/useGetPokemonPair";
 import Image from "next/image";
 
 const btnPrimary =
   "inline-block font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-pink-600 border-pink-600 hover:bg-white hover:text-pink-600";
 
-type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
-
-const PokemonListing: React.FC<{
+const PokemonCard: React.FC<{
   pokemon: PokemonFromServer;
   vote: () => void;
   disabled: boolean;
@@ -34,7 +33,8 @@ const PokemonListing: React.FC<{
           <div className="grid grid-cols-3  divide-x-2 divide-black w-full">
             <div className="col-span-2 p-2 align-middle flex">
               <div className="w-5 h-5 rounded-full bg-black" />
-              &nbsp; 100% (23)
+              &nbsp; {generateCountPercent(props.pokemon)}% (
+              {props.pokemon._count.VoteAgainst + props.pokemon._count.VoteFor})
             </div>
             <div className="p-2">
               <button
@@ -52,4 +52,4 @@ const PokemonListing: React.FC<{
   );
 };
 
-export default PokemonListing;
+export default PokemonCard;

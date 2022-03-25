@@ -1,10 +1,10 @@
-import { trpc } from "@/utils/trpc";
-import { Pokemon } from "@prisma/client";
+import { inferQueryResponse, trpc } from "@/utils/trpc";
 import { usePlausible } from "next-plausible";
 
+export type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
 interface PokemonPair {
-  firstPokemon?: Pokemon;
-  secondPokemon?: Pokemon;
+  firstPokemon?: PokemonFromServer;
+  secondPokemon?: PokemonFromServer;
   fetchingNext: boolean;
   voteForRoundest: (selected: number) => void;
 }

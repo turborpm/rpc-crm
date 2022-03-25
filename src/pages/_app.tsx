@@ -7,12 +7,20 @@ import { SessionProvider } from "next-auth/react";
 
 import "tailwindcss/tailwind.css";
 import "../styles/global.css";
+import Layout from "@/components/layout";
+import { trpc } from "@/utils/trpc";
 
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  return <Component {...pageProps} />;
+  const { data } = trpc.useQuery(["next-auth.getSession"]);
+
+  return (
+    <Layout session={data}>
+      <Component {...pageProps} />
+    </Layout>
+  );
 };
 
 function getBaseUrl() {

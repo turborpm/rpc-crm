@@ -32,7 +32,11 @@ const Layout: React.FC<{
               />
             </div>
           )}
-          <div className="text-2xl mx-auto">Which Pokémon is Rounder?</div>
+          <div className="text-2xl mx-auto">
+            <Link href="/">
+              <a>Which Pokémon is Rounder?</a>
+            </Link>
+          </div>
           <button
             className={`hidden md:inline-block absolute right-12 ${btnSecondary}`}
             onClick={() => (!session ? signIn() : signOut())}
@@ -45,7 +49,7 @@ const Layout: React.FC<{
           {/* <MenuOutlined className="bottom-12 right-8 md:bottom-4 md:right-12 bg-red-400 p-3 rounded-full absolute drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300" /> */}
         </div>
         {children}
-        <div className="w-full text-xl text-center py-2 border-t-2 border-black">
+        <footer className="w-full text-xl text-center py-2 border-t-2 border-black">
           <a href="https://github.com/galortega/roundest-mon">Github</a>
           {" | "}
           <Link href="/results">
@@ -79,7 +83,7 @@ const Layout: React.FC<{
               </div>
             </button>
           </span>
-        </div>
+        </footer>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { createRouter } from "@/backend/createRouter";
 import { prisma } from "@/backend/utils/prisma";
+import { getPokemonPair } from "@/utils/getPokemonPair";
 import { getPokemonVotesByUser } from "@/utils/getPokemonVotesByUser";
 import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { z } from "zod";
@@ -12,6 +13,17 @@ export const router = createRouter()
     async resolve({ input, ctx }) {
       const pokemon = await prisma.pokemon.findFirst({
         where: { id: input.id },
+        select: {
+          id: true,
+          name: true,
+          spriteUrl: true,
+          _count: {
+            select: {
+              VoteAgainst: true,
+              VoteFor: true,
+            },
+          },
+        },
       });
       if (!pokemon) throw new Error("Failed to find pokemon");
 
@@ -32,9 +44,7 @@ export const router = createRouter()
     async resolve() {
       const [first, second] = getOptionsForVote();
 
-      const bothPokemon = await prisma.pokemon.findMany({
-        where: { id: { in: [first, second] } },
-      });
+      const bothPokemon = await getPokemonPair(first, second);
 
       if (bothPokemon.length !== 2)
         throw new Error("Failed to find two pokemon");
