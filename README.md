@@ -13,6 +13,7 @@ Tecnolgías:
     Por implementar o cranear:
     *   websockets
     *   turborepo
+    *   react-aria
     *   pwa
     *   livepeer
     *   web3
@@ -20,7 +21,7 @@ Tecnolgías:
     *   lightning
     *   storybook
     *   algo para testing
-    *   algo para AI (ej: batallas entre pokemon)
+    *   algo para AI
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
