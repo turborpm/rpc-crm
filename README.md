@@ -1,7 +1,7 @@
 ## Description
 Misión: encontrar al pokemón más redondo a través de la sabiduría de las masas.
-Tecnolgías: 
-    Implementadas:
+
+    Stack:
     *   nextjs
     *   typescript
     *   tailwind
