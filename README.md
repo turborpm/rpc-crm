@@ -1,5 +1,5 @@
 ## Description
-Misión: encontrar al pokemón más redondo a través de la sabiduría de las masas.
+Encontrar al pokemón más redondo a través de la sabiduría de las masas.
 
     Stack:
     *   nextjs
@@ -10,19 +10,20 @@ Misión: encontrar al pokemón más redondo a través de la sabiduría de las ma
     *   planetscale (mysql)
     *   next-auth
 
-    Por implementar o cranear:
+    Por aprender stack:
     *   websockets
     *   turborepo
     *   react-aria
     *   react-stately
     *   pwa
     *   livepeer
-    *   web3
-    *   stacks
-    *   lightning
-    *   storybook
-    *   algo para testing
-    *   algo para AI
+    *   web3, pero sin que el usuario sepa que está usando web3 (jodido)
+    *   cypress E2E
+    *   tensorflow?
+    *   framer motion
+    *   aplicaciones de estructuras de datos
+    *   contenedores?
+    *   
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
