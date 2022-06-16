@@ -1,29 +1,27 @@
 ## Description
 Encontrar al pokemón más redondo a través de la sabiduría de las masas.
 
-    Stack:
-    *   nextjs
-    *   typescript
-    *   tailwind
-    *   trpc
-    *   prisma
-    *   planetscale (mysql)
-    *   next-auth
+## Stack:
+*   nextjs
+*   typescript
+*   tailwind
+*   trpc
+*   prisma
+*   planetscale (mysql)
+*   next-auth
 
-    Por aprender stack:
-    *   websockets
-    *   turborepo
-    *   react-aria
-    *   react-stately
-    *   pwa
-    *   livepeer
-    *   web3, pero sin que el usuario sepa que está usando web3 (jodido)
-    *   cypress E2E
-    *   tensorflow?
-    *   framer motion
-    *   aplicaciones de estructuras de datos
-    *   contenedores?
-    *   
+## Por implementar stack:
+*   websockets
+*   turborepo
+*   react-aria
+*   react-stately
+*   pwa
+*   livepeer
+*   web3, pero sin que el usuario sepa que está usando web3 (jodido) - pero mejor ver una solución usando la red de btc
+*   cypress E2E
+*   tensorflow?
+*   framer motion
+*   docker + terraform
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
