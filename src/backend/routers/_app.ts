@@ -4,7 +4,6 @@
 // import superjson from "superjson";
 import { createRouter } from "@/backend/createRouter";
 import { router as pokemonRouter } from "./pokemon";
-import { router as nextAuthRouter } from "./next-auth";
 
 /**
  * Create your application's root router
@@ -23,7 +22,6 @@ export const appRouter = createRouter()
    * @link https://trpc.io/docs/error-formatting
    */
   // .formatError(({ shape, error }) => { })
-  .merge(nextAuthRouter)
   .merge(pokemonRouter);
 
 export type AppRouter = typeof appRouter;

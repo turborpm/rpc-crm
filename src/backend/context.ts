@@ -1,9 +1,7 @@
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
-import { getServerSession } from "next-auth";
 
 import { prisma } from "@/backend/utils/prisma";
-import { authOptions as nextAuthOptions } from "../pages/api/auth/[...nextauth]";
 
 /**
  * Creates context for an incoming request
@@ -21,13 +19,11 @@ export const createContext = async (
    * Note: If no req -> SSG is being used -> no session exists (null)
    * @link https://github.com/nextauthjs/next-auth/issues/1535
    */
-  const session = opts && (await getServerSession(opts, nextAuthOptions));
 
   // for API-response caching see https://trpc.io/docs/caching
   return {
     req,
     res,
-    session,
     prisma,
   };
 };
