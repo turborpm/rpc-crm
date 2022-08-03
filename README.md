@@ -1,5 +1,4 @@
-## Description
-Encontrar al pokemón más redondo a través de la sabiduría de las masas.
+INDIE CRM
 
 ## Stack:
 *   nextjs
@@ -9,20 +8,6 @@ Encontrar al pokemón más redondo a través de la sabiduría de las masas.
 *   prisma
 *   planetscale (mysql)
 *   next-auth
-
-## Por implementar stack:
-*   websockets
-*   turborepo
-*   react-aria
-*   react-stately
-*   pwa
-*   livepeer
-*   web3, pero sin que el usuario sepa que está usando web3 (jodido) - pero mejor ver una solución usando la red de btc
-*   cypress E2E
-*   tensorflow?
-*   framer motion
-*   docker + terraform
-
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
