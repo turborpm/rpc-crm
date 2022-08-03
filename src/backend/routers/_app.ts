@@ -3,7 +3,6 @@
  */
 // import superjson from "superjson";
 import { createRouter } from "@/backend/createRouter";
-import { router as pokemonRouter } from "./pokemon";
 
 /**
  * Create your application's root router
@@ -11,17 +10,16 @@ import { router as pokemonRouter } from "./pokemon";
  * @link https://trpc.io/docs/ssg
  * @link https://trpc.io/docs/router
  */
-export const appRouter = createRouter()
-  /**
-   * Add data transformers
-   * @link https://trpc.io/docs/data-transformers
-   */
-  //.transformer(superjson)
-  /**
-   * Optionally do custom error (type safe!) formatting
-   * @link https://trpc.io/docs/error-formatting
-   */
-  // .formatError(({ shape, error }) => { })
-  .merge(pokemonRouter);
+export const appRouter = createRouter();
+/**
+ * Add data transformers
+ * @link https://trpc.io/docs/data-transformers
+ */
+//.transformer(superjson)
+/**
+ * Optionally do custom error (type safe!) formatting
+ * @link https://trpc.io/docs/error-formatting
+ */
+// .formatError(({ shape, error }) => { })
 
 export type AppRouter = typeof appRouter;

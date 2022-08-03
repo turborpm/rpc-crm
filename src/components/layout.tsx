@@ -8,7 +8,7 @@ const btnSecondary =
   "inline-block font-medium border border-solid text-center py-1 px-2 text-pink-600 bg-transparent border-pink-600 border-2 hover:bg-pink-600 hover:border-pink-700 hover:text-white";
 
 const Layout: React.FC<{
-  children: React.ReactChild;
+  children: JSX.Element;
 }> = ({ children }) => {
   return (
     <>
